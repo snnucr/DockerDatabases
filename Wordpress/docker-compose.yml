@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: 172.18.0.6:3306
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: 123123
+      WORDPRESS_DB_NAME: snn-wp
+      WORDPRESS_TABLE_PREFIX: wp_
+    volumes:
+      - C:\Users\[username]\Documents\Wordpress\:/var/www/html
+
+networks:
+  default:    
+    external: true
+    name : snnnetwork

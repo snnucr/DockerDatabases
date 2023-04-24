@@ -1,0 +1,33 @@
+version: '3'
+ 
+services:
+  db:
+    image: mariadb:latest
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: 123123
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: snn
+      MYSQL_PASSWORD: 123123
+    ports:
+      - "6033:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 300M
+    restart: always
+    ports:
+      - 8081:80
+volumes:
+  dbdata:
+
+networks:
+  default:    
+    external: true
+    name : snnnetwork
